@@ -19,12 +19,23 @@ $(document).ready(function() {
     body: "Click to edit"
   });
 
-  projectList.forEach(function(project) {
-    var view = new app.views.ProjectView({ model: project });
-    $('#project-list').append(view.render().el);
-  });
+  // projectList.forEach(function(project) {
+  //   var view = new app.views.ProjectView({ model: project });
+  //   $('#project-list').append(view.render().el);
+  // });
 
   // Create a view for the first Project and render it
   // var view = new app.views.ProjectView({ model: projectList.first() });
   // $('#project-list').append(view.render().el);
+
+  var me = new app.models.User({
+    first_name: "Corey",
+    last_name: "Trombley",
+    image_url: 'uploads/corey.jpg',
+    bio: 'Well ard coder from NYC',
+    mission: 'Complete level 12 on Bomberman and save the world from itself'
+  });
+  new app.views.UserView({
+    model: me
+  }).render();
 });
