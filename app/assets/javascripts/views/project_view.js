@@ -50,6 +50,7 @@ app.views.ProjectView = Backbone.View.extend({
   },
 
   delproject: function() {
+    this.model.destroy(); 
     this.$el.find('.info').fadeToggle("slow", "linear");
   }
 
