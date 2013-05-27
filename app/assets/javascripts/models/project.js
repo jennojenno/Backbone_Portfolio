@@ -1,19 +1,27 @@
 app.models.Project = Backbone.Model.extend({
 
-  // localStorage: new Backbone.LocalStorage('portfolio'),
+  url: function() {
+    var url = '/users/' + this.user.id + '/projects';
+    if(!this.isNew()) {
+      url += '/' + this.id;
+    }
+    return url;
+  },
 
-  // initialize: function() {
-  //   this.bind("change", this.updateTitle);
-  // },
+  initialize: function() {
+    this.skills = new app.collections.SkillList();
+    this.skills.model = app.models.Skill; // Don't know why but this worked
+  },
 
-  // updateTitle: function() {
-  //   this.attributes.title += " Changed";
-  // },
+  validate: function() {
+    if(this.attributes.url === "") {
+      return "Argh!";
+    }
+  },
 
-  // validate: function() {
-  //   if(this.attributes.url === "") {
-  //     return "Argh!";
-  //   }
-  // }
+  getSkills: function() {
+    this.skills.fetch();
+    return this.skills.where({ project_id : this.id });
+  }
 
 });
